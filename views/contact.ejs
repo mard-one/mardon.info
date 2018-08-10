@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/styles/css/styles.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Contact</title>
+</head>
+
+<body>
+  <% include partials/back-home.ejs %>
+    <div class="contact">
+      <div class="page-description">
+        <div class="page-description-img">
+          <img src="/images/contact-image.jpg" alt="">
+        </div>
+        <div class="grayish-blue-effect"></div>
+        <h1>contact</h1>
+      </div>
+      <div class="contact-body">
+        <div class="message">
+          <h2 class="menu-header">Send me message</h2>
+          <div class="message__form">
+            <form id='contact-form'>
+              <input type="text" name="email" placeholder="Your email*">
+              <textarea placeholder="Your message*" name="message" id="message"></textarea>
+              <button id='contact-btn'>Submit</button>
+            </form>
+          </div>
+        </div>
+        <div class="details">
+          <h2 class="menu-header">Contact details</h2>
+          <div class="details__group">
+            <div class="details__item">
+              <p>
+                <i class="fa fa-phone"></i>
+                <br> +971555908994
+              </p>
+            </div>
+            <div class="details__item">
+              <p>
+                <i class="fa fa-envelope"></i>
+                <br> mardon.mashrabov@gmail.com
+              </p>
+            </div>
+            <div class="details__item">
+              <p>
+                <i class="fa fa-map-marker"></i>
+                <br> JBR, Dubai, UAE
+              </p>
+            </div>
+          </div>
+          <div class="details__socials">
+            <div class="details__social-item">
+              <a target="_blank" href="https://www.linkedin.com/in/mardonbek" class="circle-icon fa fa-linkedin"></a>
+            </div>
+            <div class="details__social-item">
+              <a target="_blank" href="https://github.com/mard-one" class="circle-icon fa fa-github"></a>
+            </div>
+            <div class="details__social-item">
+              <a target="_blank" href="https://www.facebook.com/mardonbek.mashrabov" class="circle-icon fa fa-facebook"></a>
+            </div>
+          </div>
+        </div>
+        <div class="location">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14454.841314802532!2d55.12606858077604!3d25.077805343227947!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f14aa5ff87ec7%3A0x93485470e77f2b7a!2sJumeirah+Beach+Residence+-+Dubai!5e0!3m2!1sen!2sae!4v1533236912978"
+            width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+        <div class="message-from-server"></div>
+      </div>
+    </div>
+    <script>
+      (function () {
+        document.querySelector('#contact-form').addEventListener('submit', function (e) {
+          e.preventDefault();
+          document.querySelector('#contact-btn').disabled = true;
+          var data = new FormData(this); // create new FormData object
+          data = data.entries();
+          var obj = data.next(); // access Iterator
+          var retrieved = {};
+          while (undefined !== obj.value) {
+            retrieved[obj.value[0]] = obj.value[1];
+            obj = data.next();
+          } // parse FormData into simple Object
+
+          //at this point might occur some custom validation based on retrieved Object
+
+          var XHR = new XMLHttpRequest();
+          var urlEncodedData = "";
+          var urlEncodedDataPairs = [];
+
+          for (var name in retrieved) {
+            urlEncodedDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(retrieved[name]));
+          }
+          urlEncodedData = urlEncodedDataPairs.join('&').replace(/%20/g, '+'); // parse object into urlEncoded String
+
+          XHR.addEventListener('load', function (event) {
+            console.log('Data sent.');
+            var helper = document.querySelector('.message-from-server');
+            console.log(helper);
+            helper.style.display = 'block';
+            helper.innerHTML = JSON.parse(XHR.responseText).message;
+            setTimeout(function () {
+              helper.innerHTML = '';
+              helper.style.display = 'none';
+              document.querySelector('#contact-btn').disabled = false;
+            }, 3000)
+          });
+          XHR.addEventListener('error', function (event) {
+            console.log('Oops! Something goes wrong.');
+            var helper = document.querySelector('.message-from-server');
+            console.log(helper);
+            helper.style.display = 'block';
+            helper.innerHTML = JSON.parse(XHR.responseText).message;
+            setTimeout(function () {
+              helper.innerHTML = '';
+              helper.style.display = 'none';
+              document.querySelector('#contact-btn').disabled = false;
+            }, 3000)
+          });
+
+          XHR.open('POST', 'getintouch');
+          XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+          XHR.send(urlEncodedData); // send the form
+        });
+      })()
+    </script>
+</body>
+
+</html>

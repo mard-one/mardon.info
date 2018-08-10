@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mardon Mashrabov, Web developer</title>
+  <link rel="stylesheet" href="/styles/css/styles.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <div class="home">
+    <div class="intro">
+      <picture>
+        <source srcset="/images/home-main-big-desktop-up.jpg" media="(min-width: 1800px)" />
+        <source srcset="/images/home-main-desktop-up.jpg" media="(min-width: 900px)" />
+        <source srcset="/images/home-main-tablet-portrait-up.jpg" media="(max-width: 899px) and (min-width: 480px)" />
+        <source srcset="/images/phone-only.jpg" media="(max-width: 479px)" />
+        <img src="/images/phone-only.jpg" alt="example" />
+      </picture>
+      <!-- <img src="/images/home-main.jpg" alt=""> -->
+      <div class="grayish-blue-effect"></div>
+      <div class="intro__container">
+        <h1>Hello
+          <br>I'm <span class="highlight">Mardon</span>
+          <br>Mashrabov
+        </h1>
+        <h2>Web developer</h2>
+        <div class="intro__socials">
+          <a target="_blank" href="https://www.linkedin.com/in/mardonbek" class='fa fa-linkedin'>
+          </a>
+          <a target="_blank" href="https://github.com/mard-one" class='fa fa-github'>
+          </a>
+          <a target="_blank" href="https://www.facebook.com/mardonbek.mashrabov" class='fa fa-facebook'>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="menu">
+      <a class="menu__item" href="profile">
+        <div class="menu__bg-img">
+          <img src="/images/profile-btn.jpg" alt="">
+          <div class="grayish-blue-effect"></div>
+        </div>
+        <div class="menu__header">
+          <i class="menu__img circle-icon fa fa-user"></i>
+          <div class="menu__content">
+            <h2>
+              Pro<span class="highlight">f</span>ile
+            </h2>
+            <p>
+              Some words about me.
+            </p>
+          </div>
+        </div>
+      </a>
+      <a class="menu__item" href="resume">
+        <div class="menu__bg-img">
+          <img src="/images/resume-btn.jpg" alt="">
+          <div class="grayish-blue-effect"></div>
+        </div>
+        <div class="menu__header">
+          <i class="menu__img circle-icon fa fa-graduation-cap"></i>
+          <div class="menu__content">
+            <h2>
+              Re<span class="highlight">s</span>ume
+            </h2>
+            <p>
+              Something about my experience and skills.
+            </p>
+          </div>
+        </div>
+      </a>
+      <a class="menu__item" href="portfolio">
+        <div class="menu__bg-img">
+          <img src="/images/portfolio-btn.jpg" alt="">
+          <div class="grayish-blue-effect"></div>
+        </div>
+        <div class="menu__header">
+          <i class="menu__img circle-icon fa fa-briefcase"></i>
+          <div class="menu__content">
+            <h2>
+              Por<span class="highlight">t</span>folio
+            </h2>
+            <p>
+              Have a spoon of my work.
+            </p>
+          </div>
+        </div>
+      </a>
+      <a class="menu__item" href="contact">
+        <div class="menu__bg-img">
+          <img src="/images/contact-btn.jpg" alt="">
+          <div class="grayish-blue-effect"></div>
+        </div>
+        <div class="menu__header">
+          <i class="menu__img circle-icon fa fa-envelope-o"></i>
+          <div class="menu__content">
+            <h2>
+              C<span class="highlight">o</span>ntact
+            </h2>
+            <p>
+              Say hello or find me.
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.menu__item')
+    .forEach(function(item){
+      console.log(item);
+      item.addEventListener('mouseenter', function($event){
+        $event.target.querySelector('img').style.transform = 'scale(1.2)'
+      })
+    })
+    document.querySelectorAll('.menu__item')
+        .forEach(function (item) {
+          console.log(item);
+          item.addEventListener('mouseleave', function ($event) {
+            $event.target.querySelector('img').style.transform = 'scale(1)'
+          })
+        })
+    </script>
+</body>
+
+</html>

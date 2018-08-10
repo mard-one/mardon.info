@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/styles/css/styles.min.css">
+  <title>Portfolio</title>
+</head>
+
+<body>
+  <% include partials/back-home.ejs %>
+  <div class="portfolio">
+    <div class="page-description">
+      <div class="page-description-img">
+        <img src="/images/portfolio-image.jpg" alt="">
+      </div>
+      <div class="grayish-blue-effect"></div>
+      <h1>Portfolio</h1>
+    </div>
+    <div class="portfolio-body">
+      <h2 class="menu-header">Portfolio</h2>
+      <div class="projects-category">
+        <ul>
+          <li class='category' data-cat='all'>
+            All
+          </li>
+          <li class='category' data-cat='web'>
+            Web development
+          </li>
+          <li class='category' data-cat='graphic'>
+            Graphic Design
+          </li>
+          <li class='category' data-cat='experiment'>
+            Experiments
+          </li>
+        </ul>
+      </div>
+      <div class="projects">
+        <div class="projects__item scale-anm tile web all">
+          <a target="_blank" href="https://portfoliowebsite101.herokuapp.com/">
+            <img src="/images/portfoliowebsite101.jpg" alt="">
+          </a>
+        </div>
+        <div class="projects__item scale-anm tile experiment web all">
+          <a target="_blank" href="https://helpmetochoose.herokuapp.com/">
+            <img src="/images/helpmetochoose.jpg" alt="">
+          </a>
+        </div>
+        <div class="projects__item scale-anm tile experiment all">
+          <a target="_blank" href="https://meanstackchat.herokuapp.com/login">
+            <img src="/images/meanchat.jpg" alt="">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    (function () {
+      var selectedClass = "";
+      var clickedCats = document.querySelectorAll('.category')
+      console.log(clickedCats);
+      clickedCats.forEach(function (clickedCat) {
+        clickedCat.addEventListener('click', function ($event) {
+          selectedClass = $event.target.getAttribute('data-cat')
+          document.querySelectorAll('.projects__item')
+            .forEach(function (proj) {
+              proj.style.transform = "scale(0)";
+            })
+          document.querySelectorAll('.projects__item:not(.' + selectedClass + ')')
+            .forEach(function (i) {
+              i.style.display = 'none';
+            })
+          setTimeout(function () {
+
+            document.querySelectorAll("." + selectedClass)
+              .forEach(function (item) {
+                item.style.display = 'block'
+              })
+            document.querySelectorAll('.projects__item')
+              .forEach(function (proj) {
+                proj.style.transform = "scale(1)";
+              })
+          }, 300);
+        })
+      })
+
+    })();
+  </script>
+</body>
+
+</html>
